@@ -1,6 +1,6 @@
 {
     "name": "rafazingano/openai",
-    "version": "dev-master",
+    "version": "1.0.0",
     "description": "Package OpenAI API",
     "keywords": [
         "openai",
