@@ -12,11 +12,11 @@ class ChatOpenAIService extends OpenAIService
     {
     
         $data = [
-            'model' => 'gpt-3.5-turbo',
+            'model' => $model?? 'gpt-3.5-turbo',
             'messages' => [
                 [
-                    'role' => 'user',
-                    'content' => 'Hello!'
+                    'role' => $role?? 'user',
+                    'content' => $content?? 'Hello!'
                 ]
             ]
         ];
