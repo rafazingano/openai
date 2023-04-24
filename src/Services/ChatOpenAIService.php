@@ -4,6 +4,7 @@ namespace RafaZingano\OpenAi\Services;
 
 use GuzzleHttp\Exception\ClientException;
 use Exception;
+use RafaZingano\OpenAi\Services\OpenAIService;
 
 class ChatOpenAIService extends OpenAIService
 {
