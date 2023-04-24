@@ -1,0 +1,21 @@
+{
+    "name": "rafazingano/openai",
+    "version": "dev-master",
+    "description": "Package OpenAI API",
+    "keywords": [
+        "openai",
+        "rafazingano"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "authors": [
+        {
+            "name": "Rafael Zingano",
+            "email": "confrariaweb@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.2"
+    },
+    "minimum-stability": "dev"
+}
