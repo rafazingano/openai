@@ -75,13 +75,19 @@ class CompletionOpenAIService extends OpenAIService
         }
 
         try {
-            $response = $this->client->post('/completions', [
-                'json' => $data,
+            $response = $this->client->post('completions', [
+                'json' => $data
             ]);
 
-            return $response;
-        } catch (ClientException $e) {
-            throw new Exception("Error processing API request: " . $e->getMessage());
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode == 200) {
+                return json_decode($response->getBody(), true);
+            } else {
+                throw new \Exception("A API retornou o código de status {$statusCode}");
+            }
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
         }
     }
 }
