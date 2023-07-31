@@ -2,23 +2,15 @@
 
 namespace RafaZingano\OpenAi\Services;
 
-use GuzzleHttp\Exception\ClientException;
-use Exception;
-
 class ChatOpenAIService extends OpenAIService
 {
 
-    public function create($model, $role, $content, $options = [])
+    public function create($model, $messages, $options = [])
     {
     
         $data = [
             'model' => $model?? 'gpt-3.5-turbo',
-            'messages' => [
-                [
-                    'role' => $role?? 'user',
-                    'content' => $content?? 'Hello!'
-                ]
-            ]
+            'messages' => $messages
         ];
 
         if (isset($options['temperature'])) {
@@ -64,22 +56,22 @@ class ChatOpenAIService extends OpenAIService
         if (isset($options['user'])) {
             $data['user'] = $options['user'];
         }
-    
+
         try {
             $response = $this->client->post('chat/completions', [
                 'json' => $data
             ]);
-    
+
             $statusCode = $response->getStatusCode();
     
             if ($statusCode == 200) {
-                $completion = json_decode($response->getBody(), true);
-                return $completion;
+                return json_decode($response->getBody(), true);
+
             } else {
                 throw new \Exception("A API retornou o código de status {$statusCode}");
             }
         } catch (\Exception $e) {
-            echo "Erro: " . $e->getMessage();
+            throw new \Exception($e->getMessage());
         }
     }
 

@@ -2,7 +2,6 @@
 
 namespace RafaZingano\OpenAi\Services;
 
-use GuzzleHttp\Exception\ClientException;
 use Exception;
 
 class EmbeddingOpenAIService extends OpenAIService
@@ -14,19 +13,25 @@ class EmbeddingOpenAIService extends OpenAIService
             'model' => $model,
             'input' => $input,
         ];
-    
+
         if (isset($user)) {
             $options['user'] = $user;
         }
-    
+
         try {
-            $response = $this->client->post('/embeddings', [
+            $response = $this->client->post('embeddings', [
                 'headers' => $this->headers,
                 'json' => $options,
             ]);
-    
-            return $response;
-        } catch (ClientException $e) {
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode == 200) {
+                return $response->getBody();
+            } else {
+                throw new \Exception("A API retornou o código de status {$statusCode}");
+            }
+        } catch (Exception $e) {
             throw new Exception("Error getting embeddings: {$e->getMessage()}");
         }
     }
