@@ -27,7 +27,7 @@ class OpenAIService
         }
 
         $this->headers['Content-Type'] = 'application/json';
-        $this->base_uri = 'https://api.openai.com/v1';
+        $this->base_uri = 'https://api.openai.com/v1/';
 
         try {
             $this->client = new Client([
