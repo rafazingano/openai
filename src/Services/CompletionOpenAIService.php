@@ -8,7 +8,7 @@ use Exception;
 class CompletionOpenAIService extends OpenAIService
 {
 
-    public function getCompletions($model, $options = [])
+    public function create($model, $options = [])
     {
         $data = [
             'model' => $model

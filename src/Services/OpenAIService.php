@@ -14,14 +14,14 @@ class OpenAIService
     public function __construct()
     {
         $apiKey = env('OPENAI_API_KEY');
-        
+        $organization = env('OPENAI_ORGANIZATION');
+
         if (!$apiKey) {
             throw new Exception('A variável de ambiente OPENAI_API_KEY não está definida.');
         }
 
         $this->headers['Authorization'] = 'Bearer ' . $apiKey;
 
-        $organization = env('OPENAI_ORGANIZATION');
         if ($organization) {
             $this->headers['OpenAI-Organization'] = $organization;
         }
